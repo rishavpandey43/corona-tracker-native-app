@@ -9,7 +9,7 @@ import NewsScreen from '../screens/primary/News';
 import GuideLineScreen from '../screens/primary/GuideLine';
 import HelpScreen from '../screens/primary/Help';
 
-import {mainThemeColor} from '../styles/variables';
+import variables from '../styles/variables';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ const MainNavigation = () => {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({color, size}) => {
             let iconName;
 
             switch (route.name) {
@@ -40,16 +40,6 @@ const MainNavigation = () => {
               default:
                 break;
             }
-
-            // if (route.name === 'Home') {
-            //   iconName = focused
-            //     ? 'ios-information-circle'
-            //     : 'ios-information-circle-outline';
-            // } else if (route.name === 'Settings') {
-            //   iconName = focused ? 'ios-list-box' : 'ios-list';
-            // }
-
-            // You can return any component that you like here!
             return (
               <Icon
                 name={iconName}
@@ -61,7 +51,7 @@ const MainNavigation = () => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: mainThemeColor,
+          activeTintColor: variables.mainThemeColor,
           inactiveTintColor: 'gray',
         }}>
         <Tab.Screen

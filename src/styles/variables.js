@@ -1,1 +1,5 @@
-export const mainThemeColor = '#FF0077';
+const variable = {
+  mainThemeColor: '#FF0077',
+};
+
+export default variable;

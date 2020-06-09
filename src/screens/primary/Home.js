@@ -1,19 +1,92 @@
+// * Import required modules/dependencies
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import {Header, Image} from 'react-native-elements';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+// * Import all store related stuffs
+
+// * Import all screens/components
+
+// * Import utilites
+
+// * Import all styling stuffs
+import mainStyles from '../../styles/mainStyles';
+import variables from '../../styles/variables';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      date: new Date(),
+      showDate: false,
+    };
   }
 
   render() {
     return (
       <View>
-        <Text> Home Screen </Text>
+        <Header
+          leftComponent={() => (
+            <Image
+              source={require('../../assets/icons/virus_icon2.png')}
+              style={mainStyles.iconStyle}
+            />
+          )}
+          centerComponent={{
+            text: 'World Dashboard',
+            style: {color: variables.mainThemeColor},
+          }}
+          rightComponent={() => (
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({showDate: true});
+              }}>
+              <Text>{this.state.date.toDateString().toString()}</Text>
+            </TouchableOpacity>
+          )}
+          containerStyle={mainStyles.header}
+          backgroundColor={'#fff'}
+        />
+        <View style={[mainStyles.container, {backgroundColor: 'red'}]}>
+          <View style={[mainStyles.mainWrapper, {}]}>
+            <Text> Home Screen1 </Text>
+
+            <Text> Hello World </Text>
+          </View>
+        </View>
+        {this.state.showDate && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            timeZoneOffsetInMinutes={0}
+            value={this.state.date}
+            mode="date"
+            is24Hour={true}
+            display="default"
+            onChange={(event, selectedDate) => {
+              this.setState({
+                date: selectedDate || this.state.date,
+                showDate: false,
+              });
+            }}
+          />
+        )}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  mainWrapper: {
+    marginBottom: 50,
+    backgroundColor: '#fff',
+  },
+});
 
 export default HomeScreen;
